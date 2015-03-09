@@ -15,16 +15,16 @@ class BookingViewController: UITableViewController{
     let url = "http://localhost:8090/kiezkantine/booking/index_json"
     var bookingCellIdentifier = "bookingCell"
     var menus: [Menu] = []
-    var eaterId: String = ""
-    var week: String = ""
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.delegate = self
         tableView.dataSource = self
-        initBookings()
+        super.refreshControl = UIRefreshControl()
+        super.refreshControl?.addTarget(self, action: Selector("refresh:"), forControlEvents: UIControlEvents.ValueChanged)
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,8 +60,9 @@ class BookingViewController: UITableViewController{
         var cell = tableView.cellForRowAtIndexPath(indexPath) as UITableViewCell?
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String {
-        return "Menus"
+    func refresh(sender:AnyObject) {
+        initBookings()
+        super.refreshControl?.endRefreshing()
     }
     
     func initBookings() {

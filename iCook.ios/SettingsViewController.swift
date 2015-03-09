@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  SettingsViewController.swift
 //  iCook.ios
 //
 //  Created by Ulf Angermann on 08/03/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

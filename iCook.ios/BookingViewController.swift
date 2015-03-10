@@ -13,6 +13,8 @@ import SwiftyJSON
 class BookingViewController: UITableViewController{
 
     let url = "http://192.168.178.30:8090/kiezkantine/booking/index_json"
+    let bookingUrl = "http://192.168.178.30:8090/kiezkantine/booking/book"
+    let stornoUrl = "http://192.168.178.30:8090/kiezkantine/booking/storno"
     var bookingCellIdentifier = "bookingCell"
     var menus: [Menu] = []
     let iconHaken = UIImage(named: "icon_haken.png") as UIImage?
@@ -158,7 +160,6 @@ class BookingViewController: UITableViewController{
         
         func isInTime() -> Bool {
             dateFormatter.dateFormat = "MMMM dd, yyyy hh:mm:ss"
-//            dateFormatter.timeZone = NSTimeZone(name: "GMT + 1")
             dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
             var d1: NSDate = dateFormatter.dateFromString(date)!
             
@@ -173,11 +174,11 @@ class BookingViewController: UITableViewController{
             let dateFormatter1 = NSDateFormatter()
             dateFormatter1.dateFormat = "MMMM dd, yyyy hh:mm:ss"
             dateFormatter1.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-//            dateFormatter1.timeZone = NSTimeZone(name: "GMT + 1")
             let d1 = dateFormatter1.dateFromString(date)
             
             let dateFormatter2 = NSDateFormatter()
-            dateFormatter2.dateFormat = "dd.MM.yyyy"
+            dateFormatter2.locale = NSLocale(localeIdentifier: "de_DE_POSIX")
+            dateFormatter2.dateFormat = "dd.MM.yyyy (EEEE)"
             return dateFormatter2.stringFromDate(d1!)
         }
 
@@ -198,38 +199,46 @@ class BookingViewController: UITableViewController{
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
         // 1
         var stornoAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Stornieren" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            // 2
-            let shareMenu = UIAlertController(title: nil, message: "Share using", preferredStyle: .ActionSheet)
             
-            let twitterAction = UIAlertAction(title: "Twitter", style: UIAlertActionStyle.Default, handler: nil)
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+            Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = [
+                "Content-Type": "application/x-www-form-urlencoded",
+            ]
             
-            shareMenu.addAction(twitterAction)
-            shareMenu.addAction(cancelAction)
-            
-            self.presentViewController(shareMenu, animated: true, completion: nil)
+            var parameters = ["eater-id": self.menus[indexPath.row].eater,
+                              "menu-id": self.menus[indexPath.row].id
+            ]
+            Alamofire.request(.POST, self.stornoUrl, parameters: parameters).response{
+                (request, response, data, error) in
+                println(request)
+                println(response)
+                println(error)
+            }
+            self.refresh(self)
+
         })
         stornoAction.backgroundColor = UIColor.orangeColor()
         // 3
         var anfrageAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Anfragen" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            // 4
-            let rateMenu = UIAlertController(title: nil, message: "Rate this App", preferredStyle: .ActionSheet)
-            
-            let appRateAction = UIAlertAction(title: "Anfrage", style: UIAlertActionStyle.Default, handler: nil)
-            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
-            
-            rateMenu.addAction(appRateAction)
-            rateMenu.addAction(cancelAction)
-            
-            
-            self.presentViewController(rateMenu, animated: true, completion: nil)
-        })
-        // 5
-        var bookingAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Buchen" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            // 4
-            self.book(self.menus[indexPath.row])
-            self.initBookings()
 
+
+        })
+
+        var bookingAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Buchen" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            
+            Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = [
+                "Content-Type": "application/x-www-form-urlencoded",
+            ]
+            
+            var parameters = ["eater-id": self.menus[indexPath.row].eater,
+                              "menu-id": self.menus[indexPath.row].id
+            ]
+            Alamofire.request(.POST, self.bookingUrl, parameters: parameters).response{
+                (request, response, data, error) in
+                println(request)
+                println(response)
+                println(error)
+            }
+            self.refresh(self)
         })
         stornoAction.backgroundColor = UIColor.redColor()
         anfrageAction.backgroundColor = UIColor.redColor()

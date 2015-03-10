@@ -4,20 +4,56 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Booking View Controller-->
+        <!--Speiseplan-->
         <scene sceneID="gha-E8-srj">
             <objects>
                 <tableViewController id="hZ8-Lm-s52" customClass="BookingViewController" customModule="iCook_ios" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Qjg-JI-yEy">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="22" sectionFooterHeight="22" id="Qjg-JI-yEy">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="bookingCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="bookingCell" id="qSe-OH-Hp7">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="bookingCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="bookingCell" rowHeight="125" id="qSe-OH-Hp7" customClass="BookingCell" customModule="iCook_ios">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qSe-OH-Hp7" id="2yA-8w-tVV">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icook" translatesAutoresizingMaskIntoConstraints="NO" id="yst-8B-FoB">
+                                            <rect key="frame" x="8" y="17" width="76" height="75.5"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hyk-ks-k3E">
+                                            <rect key="frame" x="93" y="51" width="499" height="66"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3U-dC-gtg">
+                                            <rect key="frame" x="93" y="3" width="493" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="361-fR-3fT">
+                                            <rect key="frame" x="93" y="30" width="493" height="21"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="Title">
+                                                    <attributes>
+                                                        <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="bookinDate" destination="v3U-dC-gtg" id="Arl-Nt-rMH"/>
+                                    <outlet property="bookinImage" destination="yst-8B-FoB" id="j3d-T8-ZaZ"/>
+                                    <outlet property="bookingDetails" destination="Hyk-ks-k3E" id="MAx-7M-DXc"/>
+                                    <outlet property="bookingTitle" destination="361-fR-3fT" id="Ghf-oc-O4D"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -25,17 +61,17 @@
                             <outlet property="delegate" destination="hZ8-Lm-s52" id="OrR-EE-NSa"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Booking View Controller" id="lbm-hH-oK3"/>
+                    <navigationItem key="navigationItem" title="Speiseplan" id="lbm-hH-oK3"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jjr-Xd-Rfj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1808" y="-781"/>
+            <point key="canvasLocation" x="1835" y="-779"/>
         </scene>
-        <!--Item-->
+        <!--Booking-->
         <scene sceneID="8Bo-OJ-Khg">
             <objects>
                 <navigationController id="aUt-hw-1Pu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Emh-Qv-kad"/>
+                    <tabBarItem key="tabBarItem" title="Booking" image="first" id="Emh-Qv-kad"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CYV-Fk-qUA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -67,4 +103,8 @@
             <point key="canvasLocation" x="-60" y="-350"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="first" width="30" height="30"/>
+        <image name="icook" width="75" height="75"/>
+    </resources>
 </document>

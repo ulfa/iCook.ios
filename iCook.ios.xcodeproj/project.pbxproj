@@ -10,6 +10,7 @@
 		8A368CAF1AAD6AA600B19D69 /* ICookClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A368CAE1AAD6AA600B19D69 /* ICookClient.swift */; };
 		8A368CC01AAD7BF300B19D69 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A368CB91AAD7BE100B19D69 /* SwiftyJSON.framework */; };
 		8A368CC11AAD7BF300B19D69 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A368CB91AAD7BE100B19D69 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8A368CC51AAE08CF00B19D69 /* BookingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A368CC41AAE08CF00B19D69 /* BookingCell.swift */; };
 		8A8C9C391AAC1A5700F890A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C9C381AAC1A5700F890A9 /* AppDelegate.swift */; };
 		8A8C9C3B1AAC1A5700F890A9 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C9C3A1AAC1A5700F890A9 /* BookingViewController.swift */; };
 		8A8C9C401AAC1A5700F890A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A8C9C3E1AAC1A5700F890A9 /* Main.storyboard */; };
@@ -120,6 +121,7 @@
 /* Begin PBXFileReference section */
 		8A368CAE1AAD6AA600B19D69 /* ICookClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICookClient.swift; sourceTree = "<group>"; };
 		8A368CB11AAD7BE100B19D69 /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyJSON.xcodeproj; path = ../SwiftyJSON/SwiftyJSON.xcodeproj; sourceTree = "<group>"; };
+		8A368CC41AAE08CF00B19D69 /* BookingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingCell.swift; sourceTree = "<group>"; };
 		8A8C9C331AAC1A5700F890A9 /* iCook.ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCook.ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A8C9C371AAC1A5700F890A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A8C9C381AAC1A5700F890A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 		8A8C9C351AAC1A5700F890A9 /* iCook.ios */ = {
 			isa = PBXGroup;
 			children = (
+				8A368CC41AAE08CF00B19D69 /* BookingCell.swift */,
 				8A8C9C6E1AAC1AC100F890A9 /* Locksmith.swift */,
 				8A8C9C6F1AAC1AC100F890A9 /* LocksmithRequest.swift */,
 				8A8C9C381AAC1A5700F890A9 /* AppDelegate.swift */,
@@ -415,6 +418,7 @@
 				8A8C9C711AAC1AC100F890A9 /* LocksmithRequest.swift in Sources */,
 				8A8C9C391AAC1A5700F890A9 /* AppDelegate.swift in Sources */,
 				8A8C9C3B1AAC1A5700F890A9 /* BookingViewController.swift in Sources */,
+				8A368CC51AAE08CF00B19D69 /* BookingCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

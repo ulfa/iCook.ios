@@ -28,7 +28,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3U-dC-gtg">
-                                            <rect key="frame" x="93" y="3" width="493" height="21"/>
+                                            <rect key="frame" x="93" y="3" width="176" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -46,9 +46,13 @@
                                             </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0UC-fe-y6r">
+                                            <rect key="frame" x="295" y="4" width="20" height="18"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="bookedImage" destination="0UC-fe-y6r" id="Xs6-Ud-gX9"/>
                                     <outlet property="bookinDate" destination="v3U-dC-gtg" id="Arl-Nt-rMH"/>
                                     <outlet property="bookinImage" destination="yst-8B-FoB" id="j3d-T8-ZaZ"/>
                                     <outlet property="bookingDetails" destination="Hyk-ks-k3E" id="MAx-7M-DXc"/>
@@ -65,7 +69,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jjr-Xd-Rfj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1835" y="-779"/>
+            <point key="canvasLocation" x="1828" y="-777"/>
         </scene>
         <!--Booking-->
         <scene sceneID="8Bo-OJ-Khg">

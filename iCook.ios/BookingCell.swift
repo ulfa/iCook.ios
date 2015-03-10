@@ -15,6 +15,7 @@ class BookingCell: UITableViewCell {
     @IBOutlet var bookinImage: UIImageView!
     @IBOutlet var bookingTitle: UILabel!
     
+    @IBOutlet var bookedImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

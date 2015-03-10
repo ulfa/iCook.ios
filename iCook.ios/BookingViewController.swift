@@ -12,9 +12,10 @@ import SwiftyJSON
 
 class BookingViewController: UITableViewController{
 
-    let url = "http://localhost:8090/kiezkantine/booking/index_json"
+    let url = "http://192.168.178.30:8090/kiezkantine/booking/index_json"
     var bookingCellIdentifier = "bookingCell"
     var menus: [Menu] = []
+    let iconHaken = UIImage(named: "icon_haken.png") as UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,23 +46,25 @@ class BookingViewController: UITableViewController{
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier(bookingCellIdentifier, forIndexPath: indexPath) as BookingCell
-        cell.bookinDate.text = convertDate(menus[indexPath.row].date)
+        cell.bookinDate.text = menus[indexPath.row].convertDate()
         cell.bookingTitle.text = menus[indexPath.row].title
         cell.bookingTitle.font = UIFont(name:"HelveticaNeue-Bold", size: 24)
         cell.bookingDetails.text = menus[indexPath.row].details
         cell.bookingDetails.font = UIFont(name:"HelveticaNeue -Bold", size: 18)
         cell.bookingDetails.lineBreakMode = .ByWordWrapping
         cell.bookingDetails.numberOfLines = 0
+        cell.bookedImage?.image = menus[indexPath.row].allreadybooked() == true ? iconHaken : nil
+        if !menus[indexPath.row].isInTime()  {
+            createStruckOut(menus[indexPath.row].details, label: cell.bookingDetails)
+            createStruckOut(menus[indexPath.row].title, label: cell.bookingTitle)
+        }
         return cell
     }
     
-    func convertDate(date: String) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MMMM dd, yyyy hh:mm:ss"
-        dateFormatter.timeZone = NSTimeZone(name: "GMT")
-        var date1 = dateFormatter.dateFromString(date)
-        dateFormatter.dateFormat = "dd.MM.yyyy"
-        return dateFormatter.stringFromDate(date1!)
+    func createStruckOut(text: String, label: UILabel)  {
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: text)
+        attributeString.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, attributeString.length))
+        label.attributedText = attributeString
     }
     
     //UITableViewDelegate
@@ -130,14 +133,14 @@ class BookingViewController: UITableViewController{
     }
     
     class Menu {
-        let dateFormatter = NSDateFormatter()
+        var dateFormatter = NSDateFormatter()
         var title: String
         var details: String
         var vegetarian: Bool
         var id: String
         var slots: String
         var countGiven: String
-        var date: String
+        let date: String
         var eater: String
         var bookings : [String]
         
@@ -153,11 +156,12 @@ class BookingViewController: UITableViewController{
             self.bookings = bookings
         }
         
-        func isInTime() -> Bool{
+        func isInTime() -> Bool {
             dateFormatter.dateFormat = "MMMM dd, yyyy hh:mm:ss"
-            dateFormatter.timeZone = NSTimeZone(name: "GMT + 1")
+//            dateFormatter.timeZone = NSTimeZone(name: "GMT + 1")
+            dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
             var d1: NSDate = dateFormatter.dateFromString(date)!
-        
+            
             dateFormatter.dateFormat = "dd.MM.yyyy"
             var d2: String = dateFormatter.stringFromDate(NSDate()) + " 12:00:00"
             dateFormatter.dateFormat = "dd.MM.yy hh:mm:ss"
@@ -165,12 +169,32 @@ class BookingViewController: UITableViewController{
             return d1.timeIntervalSinceDate(d3) > 0
         }
         
-        func allreadybooked() {
-            contains(bookings, id)
+        func convertDate() -> String {
+            let dateFormatter1 = NSDateFormatter()
+            dateFormatter1.dateFormat = "MMMM dd, yyyy hh:mm:ss"
+            dateFormatter1.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+//            dateFormatter1.timeZone = NSTimeZone(name: "GMT + 1")
+            let d1 = dateFormatter1.dateFromString(date)
+            
+            let dateFormatter2 = NSDateFormatter()
+            dateFormatter2.dateFormat = "dd.MM.yyyy"
+            return dateFormatter2.stringFromDate(d1!)
+        }
+
+        
+        func allreadybooked() -> Bool{
+            return contains(bookings, eater)
+        }
+        
+        func getSlotCount() -> Int {
+            return slots.toInt()!
         }
         
     }
     
+    func book(menu: Menu) {
+        println("Title: \(menu.title)")
+    }
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
         // 1
         var stornoAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Stornieren" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
@@ -183,9 +207,9 @@ class BookingViewController: UITableViewController{
             shareMenu.addAction(twitterAction)
             shareMenu.addAction(cancelAction)
             
-            
             self.presentViewController(shareMenu, animated: true, completion: nil)
         })
+        stornoAction.backgroundColor = UIColor.orangeColor()
         // 3
         var anfrageAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Anfragen" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             // 4
@@ -201,7 +225,19 @@ class BookingViewController: UITableViewController{
             self.presentViewController(rateMenu, animated: true, completion: nil)
         })
         // 5
+        var bookingAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Buchen" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            // 4
+            self.book(self.menus[indexPath.row])
+            self.initBookings()
 
-        return [stornoAction,anfrageAction]
+        })
+        stornoAction.backgroundColor = UIColor.redColor()
+        anfrageAction.backgroundColor = UIColor.redColor()
+        bookingAction.backgroundColor = UIColor.blueColor()
+//        if menus[indexPath.row].isInTime() {
+            return [stornoAction,bookingAction,anfrageAction]
+//        } else {
+//            return []
+//        }
     }
 }

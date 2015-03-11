@@ -52,10 +52,10 @@ class BookingViewController: UITableViewController{
         cell.bookinDate.text = menus[indexPath.row].convertDate()
         cell.bookingTitle.text = menus[indexPath.row].title
         cell.bookingTitle.font = UIFont(name:"HelveticaNeue-Bold", size: 24)
+        
         cell.bookingDetails.text = menus[indexPath.row].details
         cell.bookingDetails.font = UIFont(name:"HelveticaNeue -Bold", size: 18)
-        cell.bookingDetails.lineBreakMode = .ByWordWrapping
-        cell.bookingDetails.numberOfLines = 0
+    
         cell.bookedImage?.image = menus[indexPath.row].allreadybooked() == true ? iconHaken : nil
         if !menus[indexPath.row].isInTime()  {
             createStruckOut(menus[indexPath.row].details, label: cell.bookingDetails)
@@ -198,7 +198,6 @@ class BookingViewController: UITableViewController{
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
-        println(".....................\(indexPath.row)")
         var stornoAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Stornieren" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
 
             var parameters = ["eater-id": self.menus[indexPath.row].eater,

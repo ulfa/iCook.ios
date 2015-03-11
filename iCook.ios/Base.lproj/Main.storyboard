@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Speiseplan-->
@@ -18,10 +19,10 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qSe-OH-Hp7" id="2yA-8w-tVV">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icook" translatesAutoresizingMaskIntoConstraints="NO" id="yst-8B-FoB">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="icook" translatesAutoresizingMaskIntoConstraints="NO" id="yst-8B-FoB">
                                             <rect key="frame" x="8" y="17" width="76" height="75.5"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hyk-ks-k3E">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="mit Pfeffersauce, Ofenkartoffeln und Gemüse, Dessert" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hyk-ks-k3E">
                                             <rect key="frame" x="93" y="51" width="499" height="66"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -33,7 +34,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="361-fR-3fT">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="361-fR-3fT">
                                             <rect key="frame" x="93" y="30" width="493" height="21"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="Title">
@@ -50,6 +51,12 @@
                                             <rect key="frame" x="329" y="4" width="20" height="18"/>
                                         </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="yst-8B-FoB" firstAttribute="leading" secondItem="2yA-8w-tVV" secondAttribute="leadingMargin" id="5hs-Dw-LL9"/>
+                                        <constraint firstItem="Hyk-ks-k3E" firstAttribute="trailing" secondItem="2yA-8w-tVV" secondAttribute="trailingMargin" id="I7a-3A-QGO"/>
+                                        <constraint firstItem="Hyk-ks-k3E" firstAttribute="leading" secondItem="yst-8B-FoB" secondAttribute="trailing" constant="9" id="SXF-qs-nD3"/>
+                                        <constraint firstItem="361-fR-3fT" firstAttribute="leading" secondItem="yst-8B-FoB" secondAttribute="trailing" constant="9" id="gu3-Bf-t5R"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="bookedImage" destination="0UC-fe-y6r" id="Xs6-Ud-gX9"/>

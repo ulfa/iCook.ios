@@ -19,6 +19,7 @@ class BookingViewController: UITableViewController{
     var bookingCellIdentifier = "bookingCell"
     var menus: [Menu] = []
     let iconHaken = UIImage(named: "icon_haken.png") as UIImage?
+    let iconAnfrage = UIImage(named: "anfrage.png") as UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +57,11 @@ class BookingViewController: UITableViewController{
         cell.bookingDetails.text = menus[indexPath.row].details
         cell.bookingDetails.font = UIFont(name:"HelveticaNeue -Bold", size: 18)
     
-        cell.bookedImage?.image = menus[indexPath.row].allreadybooked() == true ? iconHaken : nil
+        if menus[indexPath.row].allreadybooked() {
+            cell.bookedImage?.image = iconHaken
+        } else if menus[indexPath.row].isRequester() {
+            cell.bookedImage?.image = iconAnfrage
+        }
         if !menus[indexPath.row].isInTime()  {
             createStruckOut(menus[indexPath.row].details, label: cell.bookingDetails)
             createStruckOut(menus[indexPath.row].title, label: cell.bookingTitle)
@@ -120,20 +125,29 @@ class BookingViewController: UITableViewController{
             bookings.append(subJson["eater"].stringValue)
         }
         return bookings
-    
     }
-    
+
+    func createRequesters(data: JSON) -> [String] {
+        var requesters: [String] = []
+        for (key: String, subJson: JSON) in data {
+            requesters.append(subJson["requester"].stringValue)
+        }
+        return requesters
+    }
+
     func createMenu(data: JSON, eater: String) -> Menu {
         var id  = data["menu"]["id"].stringValue
         var date = data["menu"]["date"].stringValue
         var slots = data["menu"]["slots"].stringValue
-        var countGiven = data["menu"]["count_given"].stringValue
+        var countGiven = data["free_slots"].stringValue
         var title = data["dish"]["title"].stringValue
         var details = data["dish"]["details"].stringValue
         var vegetarian =  data["dish"]["vegetarian"].boolValue
         var bookings = createBookings(data["bookings"])
         var eaterNames = data["eater_name"].stringValue
-        return Menu(id: id, date: date, slots: slots, countGiven: countGiven, title: title, details: details, vegetarian: vegetarian, eater: eater, bookings: bookings, eaterNames: eaterNames)
+        var requesters = createRequesters(data["requesters"])
+        println("requesters : \(requesters)")
+        return Menu(id: id, date: date, slots: slots, countGiven: countGiven, title: title, details: details, vegetarian: vegetarian, eater: eater, bookings: bookings, eaterNames: eaterNames, requesters: requesters)
     }
     
     class Menu {
@@ -148,8 +162,9 @@ class BookingViewController: UITableViewController{
         var eater: String
         var bookings : [String]
         var eaterNames : String
+        var requesters :[String]
         
-        init(id: String, date: String, slots: String, countGiven: String, title: String, details: String, vegetarian: Bool, eater: String, bookings: [String], eaterNames: String) {
+        init(id: String, date: String, slots: String, countGiven: String, title: String, details: String, vegetarian: Bool, eater: String, bookings: [String], eaterNames: String, requesters: [String]) {
             self.id = id
             self.date = date
             self.slots = slots
@@ -160,6 +175,7 @@ class BookingViewController: UITableViewController{
             self.eater = eater
             self.bookings = bookings
             self.eaterNames = eaterNames
+            self.requesters = requesters
         }
         
         func isInTime() -> Bool {
@@ -193,6 +209,10 @@ class BookingViewController: UITableViewController{
         
         func getSlotCount() -> Int {
             return slots.toInt()!
+        }
+        
+        func isRequester() -> Bool {
+            return contains(requesters, eater)
         }
         
     }
@@ -231,12 +251,12 @@ class BookingViewController: UITableViewController{
         stornoAction.backgroundColor = UIColor.redColor()
         anfrageAction.backgroundColor = UIColor.redColor()
         bookingAction.backgroundColor = UIColor.blueColor()
-        
+
         if (self.menus[indexPath.row].allreadybooked() && self.menus[indexPath.row].isInTime()) {
             return [esserAction, stornoAction]
-        } else if (!self.menus[indexPath.row].allreadybooked() && self.menus[indexPath.row].isInTime()) {
+        } else if (self.menus[indexPath.row].countGiven.toInt() > 0 && self.menus[indexPath.row].isInTime()) {
             return [esserAction, bookingAction]
-        } else if (self.menus[indexPath.row].allreadybooked() && self.menus[indexPath.row].isInTime()) {
+        } else if (self.menus[indexPath.row].isInTime()) {
             return [esserAction, anfrageAction]
         }
         return [esserAction]

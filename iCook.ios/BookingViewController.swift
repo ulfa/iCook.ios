@@ -132,7 +132,8 @@ class BookingViewController: UITableViewController{
         var details = data["dish"]["details"].stringValue
         var vegetarian =  data["dish"]["vegetarian"].boolValue
         var bookings = createBookings(data["bookings"])
-        return Menu(id: id, date: date, slots: slots, countGiven: countGiven, title: title, details: details, vegetarian: vegetarian, eater: eater, bookings: bookings)
+        var eaterNames = data["eater_name"].stringValue
+        return Menu(id: id, date: date, slots: slots, countGiven: countGiven, title: title, details: details, vegetarian: vegetarian, eater: eater, bookings: bookings, eaterNames: eaterNames)
     }
     
     class Menu {
@@ -146,8 +147,9 @@ class BookingViewController: UITableViewController{
         let date: String
         var eater: String
         var bookings : [String]
+        var eaterNames : String
         
-        init(id: String, date: String, slots: String, countGiven: String, title: String, details: String, vegetarian: Bool, eater: String, bookings: [String]) {
+        init(id: String, date: String, slots: String, countGiven: String, title: String, details: String, vegetarian: Bool, eater: String, bookings: [String], eaterNames: String) {
             self.id = id
             self.date = date
             self.slots = slots
@@ -157,6 +159,7 @@ class BookingViewController: UITableViewController{
             self.vegetarian = vegetarian
             self.eater = eater
             self.bookings = bookings
+            self.eaterNames = eaterNames
         }
         
         func isInTime() -> Bool {
@@ -223,6 +226,7 @@ class BookingViewController: UITableViewController{
         })
         
         var esserAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Esser" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            self.createAllEaterView(self.menus[indexPath.row].eaterNames)
         })
         esserAction.backgroundColor = UIColor.lightGrayColor()
         stornoAction.backgroundColor = UIColor.redColor()
@@ -252,4 +256,11 @@ class BookingViewController: UITableViewController{
             self.initBookings()
         }
     }
+    
+    func createAllEaterView(eaterNames: String) {
+        var alert = UIAlertController(title: "Esser", message: eaterNames, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
 }

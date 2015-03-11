@@ -15,6 +15,7 @@ class BookingViewController: UITableViewController{
     let url = "http://192.168.178.30:8090/kiezkantine/booking/index_json"
     let bookingUrl = "http://192.168.178.30:8090/kiezkantine/booking/book"
     let stornoUrl = "http://192.168.178.30:8090/kiezkantine/booking/storno"
+    let requestUrl = "http://192.168.178.30:8090/kiezkantine/booking/request"
     var bookingCellIdentifier = "bookingCell"
     var menus: [Menu] = []
     let iconHaken = UIImage(named: "icon_haken.png") as UIImage?
@@ -193,60 +194,62 @@ class BookingViewController: UITableViewController{
         
     }
     
-    func book(menu: Menu) {
-        println("Title: \(menu.title)")
-    }
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
-        // 1
+        println(".....................\(indexPath.row)")
         var stornoAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Stornieren" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            
-            Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = [
-                "Content-Type": "application/x-www-form-urlencoded",
-            ]
-            
+
             var parameters = ["eater-id": self.menus[indexPath.row].eater,
                               "menu-id": self.menus[indexPath.row].id
-            ]
-            Alamofire.request(.POST, self.stornoUrl, parameters: parameters).response{
-                (request, response, data, error) in
-                println(request)
-                println(response)
-                println(error)
-            }
-            self.refresh(self)
-
+                             ]
+            self.sendRequest(self.stornoUrl, parameters: parameters)
         })
-        stornoAction.backgroundColor = UIColor.orangeColor()
-        // 3
+
         var anfrageAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Anfragen" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
 
-
+            var parameters = ["eater-id": self.menus[indexPath.row].eater,
+                              "menu-id": self.menus[indexPath.row].id
+                             ]
+            
+            self.sendRequest(self.requestUrl, parameters: parameters)
         })
 
         var bookingAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Buchen" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             
-            Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = [
-                "Content-Type": "application/x-www-form-urlencoded",
-            ]
-            
             var parameters = ["eater-id": self.menus[indexPath.row].eater,
                               "menu-id": self.menus[indexPath.row].id
-            ]
-            Alamofire.request(.POST, self.bookingUrl, parameters: parameters).response{
-                (request, response, data, error) in
-                println(request)
-                println(response)
-                println(error)
-            }
-            self.refresh(self)
+                             ]
+            
+            self.sendRequest(self.bookingUrl, parameters: parameters)
         })
+        
+        var esserAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Esser" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        })
+        esserAction.backgroundColor = UIColor.lightGrayColor()
         stornoAction.backgroundColor = UIColor.redColor()
         anfrageAction.backgroundColor = UIColor.redColor()
         bookingAction.backgroundColor = UIColor.blueColor()
-//        if menus[indexPath.row].isInTime() {
-            return [stornoAction,bookingAction,anfrageAction]
-//        } else {
-//            return []
-//        }
+        
+        if (self.menus[indexPath.row].allreadybooked() && self.menus[indexPath.row].isInTime()) {
+            return [esserAction, stornoAction]
+        } else if (!self.menus[indexPath.row].allreadybooked() && self.menus[indexPath.row].isInTime()) {
+            return [esserAction, bookingAction]
+        } else if (self.menus[indexPath.row].allreadybooked() && self.menus[indexPath.row].isInTime()) {
+            return [esserAction, anfrageAction]
+        }
+        return [esserAction]
+    }
+    
+    func sendRequest(url: String, parameters: [String: AnyObject]) {
+        Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = [
+            "Content-Type": "application/x-www-form-urlencoded",
+        ]
+    
+        Alamofire.request(.POST, url, parameters: parameters).response{
+            (request, response, data, error) in
+            println(request)
+            println(response)
+            println(error)
+            self.initBookings()
+        }
     }
 }

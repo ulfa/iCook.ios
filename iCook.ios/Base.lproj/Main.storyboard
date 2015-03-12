@@ -140,6 +140,9 @@
                                                     <rect key="frame" x="109" y="7" width="473" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="saveLocationURI:" destination="WvG-zu-xYV" eventType="editingDidEnd" id="HVE-of-vmY"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -171,6 +174,9 @@
                                                     <rect key="frame" x="106" y="5" width="475" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="saveAccount:" destination="WvG-zu-xYV" eventType="editingDidEnd" id="fN5-yR-may"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -198,6 +204,9 @@
                                                     <rect key="frame" x="107" y="3" width="476" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="savePassword:" destination="WvG-zu-xYV" eventType="editingDidEnd" id="Z3Q-o7-tPd"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -219,6 +228,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="uQc-WB-TqW"/>
+                    <connections>
+                        <outlet property="accountTest" destination="bce-En-f2O" id="jQ2-36-oF1"/>
+                        <outlet property="locationText" destination="PNl-l3-SIe" id="rLW-oY-ffu"/>
+                        <outlet property="passwordText" destination="7M6-L8-7hl" id="rUv-fo-gVg"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iHB-u2-Gly" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

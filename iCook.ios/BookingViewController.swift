@@ -12,10 +12,12 @@ import SwiftyJSON
 
 class BookingViewController: UITableViewController{
 
-    let url = "http://192.168.178.30:8090/kiezkantine/booking/index_json"
-    let bookingUrl = "http://192.168.178.30:8090/kiezkantine/booking/book"
-    let stornoUrl = "http://192.168.178.30:8090/kiezkantine/booking/storno"
-    let requestUrl = "http://192.168.178.30:8090/kiezkantine/booking/request"
+    var baseURI: String = ""
+    var account: String = ""
+    let url = "/booking/index_json"
+    let bookingUrl = "/booking/book"
+    let stornoUrl = "/booking/storno"
+    let requestUrl = "/booking/request"
     var bookingCellIdentifier = "bookingCell"
     var menus: [Menu] = []
     let iconHaken = UIImage(named: "icon_haken.png") as UIImage?
@@ -23,12 +25,16 @@ class BookingViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         // Do any additional setup after loading the view, typically from a nib.
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.delegate = self
         tableView.dataSource = self
         super.refreshControl = UIRefreshControl()
         super.refreshControl?.addTarget(self, action: Selector("refresh:"), forControlEvents: UIControlEvents.ValueChanged)
+        let settings = appDelegate.loadSettings()
+        baseURI = settings["locationURI"]!
+        account = createAccount(settings["account"]!, passwd: settings["password"]!)
         initBookings()
     }
 
@@ -37,8 +43,18 @@ class BookingViewController: UITableViewController{
         // Dispose of any resources that can be recreated.
     }
 
-
-    // UITableViewDataSource
+    func checkSettings(settings: Dictionary<String, String>) -> Int{
+        if settings.isEmpty {
+            return -1
+        } else if settings["locationURI"] == nil {
+            return -2
+        } else if settings["account"] == nil {
+            return -3
+        } else if settings["password"] == nil {
+            return -4
+        }
+        return 0
+    }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -61,6 +77,8 @@ class BookingViewController: UITableViewController{
             cell.bookedImage?.image = iconHaken
         } else if menus[indexPath.row].isRequester() {
             cell.bookedImage?.image = iconAnfrage
+        } else {
+           cell.bookedImage?.image = nil
         }
         if !menus[indexPath.row].isInTime()  {
             createStruckOut(menus[indexPath.row].details, label: cell.bookingDetails)
@@ -100,15 +118,17 @@ class BookingViewController: UITableViewController{
         var lMenus: [Menu] = []
         Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = [
             "Accept": "application/json",
-            "REMOTE_USER": "ua"
+            "Authorization": "Basic " + self.account
         ]
-        Alamofire.request(.GET, url)
+        Alamofire.request(.GET, baseURI + url)
             .responseJSON { (request, response, Json, error) in
-                let json = JSON(Json!)
-                var eater = json["eater_id"].stringValue
-                self.menus = self.createMenus(json["menus"], eater: eater)
-                self.tableView.reloadData()
-        }
+                if response != nil {
+                    let json = JSON(Json!)
+                    var eater = json["eater_id"].stringValue
+                    self.menus = self.createMenus(json["menus"], eater: eater)
+                    self.tableView.reloadData()
+                }
+            }
     }
     
     func createMenus(data: JSON, eater: String) -> [Menu]{
@@ -146,7 +166,6 @@ class BookingViewController: UITableViewController{
         var bookings = createBookings(data["bookings"])
         var eaterNames = data["eater_name"].stringValue
         var requesters = createRequesters(data["requesters"])
-        println("requesters : \(requesters)")
         return Menu(id: id, date: date, slots: slots, countGiven: countGiven, title: title, details: details, vegetarian: vegetarian, eater: eater, bookings: bookings, eaterNames: eaterNames, requesters: requesters)
     }
     
@@ -223,7 +242,7 @@ class BookingViewController: UITableViewController{
             var parameters = ["eater-id": self.menus[indexPath.row].eater,
                               "menu-id": self.menus[indexPath.row].id
                              ]
-            self.sendRequest(self.stornoUrl, parameters: parameters)
+            self.sendRequest(self.baseURI + self.stornoUrl, parameters: parameters)
         })
 
         var anfrageAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Anfragen" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
@@ -232,7 +251,7 @@ class BookingViewController: UITableViewController{
                               "menu-id": self.menus[indexPath.row].id
                              ]
             
-            self.sendRequest(self.requestUrl, parameters: parameters)
+            self.sendRequest(self.baseURI + self.requestUrl, parameters: parameters)
         })
 
         var bookingAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Buchen" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
@@ -241,7 +260,7 @@ class BookingViewController: UITableViewController{
                               "menu-id": self.menus[indexPath.row].id
                              ]
             
-            self.sendRequest(self.bookingUrl, parameters: parameters)
+            self.sendRequest(self.baseURI + self.bookingUrl, parameters: parameters)
         })
         
         var esserAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Esser" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
@@ -265,13 +284,10 @@ class BookingViewController: UITableViewController{
     func sendRequest(url: String, parameters: [String: AnyObject]) {
         Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = [
             "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": "Basic " + self.account
         ]
-    
         Alamofire.request(.POST, url, parameters: parameters).response{
             (request, response, data, error) in
-            println(request)
-            println(response)
-            println(error)
             self.initBookings()
         }
     }
@@ -281,5 +297,13 @@ class BookingViewController: UITableViewController{
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
+    
+    func createAccount(account: String, passwd: String) -> String {
+        let plainString = account + ":" + passwd as NSString
+        let plainData = plainString.dataUsingEncoding(NSUTF8StringEncoding)
+        let base64String =  plainData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.init(0))
+        return base64String!
+    }
 
+    
 }

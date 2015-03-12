@@ -12,10 +12,20 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let SERVICE = "icook"
+    let USERACCOUNT = "userAccout"
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        if checkSettings(loadSettings()) != 0 {
+            println(".......... error checking settings")
+            if let tabBarController = self.window!.rootViewController as? UITabBarController {
+                tabBarController.selectedIndex = 1
+                
+            }
+        }
+
         return true
     }
 
@@ -40,6 +50,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func loadSettings() -> Dictionary<String, String> {
+        var settings: Dictionary<String, String> = Dictionary()
+        let (data, error) = Locksmith.loadDataForUserAccount(USERACCOUNT, inService: SERVICE)
+        if data != nil {
+            settings = data as Dictionary
+        }
+        return settings
+    }
+    
+    func checkSettings(settings: Dictionary<String, String>) -> Int{
+        if settings.isEmpty {
+            return -1
+        } else if settings["locationURI"] == nil  {
+            return -2
+        } else if settings["account"] == nil {
+            return -3
+        } else if settings["password"] == nil {
+            return -4
+        }
+        return 0
+    }
+
 
 
 }

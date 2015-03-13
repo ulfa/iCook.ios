@@ -18,7 +18,6 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate{
 
     let SERVICE = "icook"
     let USERACCOUNT = "userAccout"
-    
     let LOCATION = "locationURI"
     let ACCOUNT = "account"
     let PASSWORD = "password"
@@ -29,8 +28,8 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        passwordText.secureTextEntry = true
         var settings = loadSettings() as Dictionary<String, String>
+        passwordText.secureTextEntry = true
         locationText.text = settings[LOCATION]
         accountTest.text = settings[ACCOUNT]
         passwordText.text = settings[PASSWORD]

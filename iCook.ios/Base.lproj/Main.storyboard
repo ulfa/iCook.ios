@@ -28,8 +28,8 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3U-dC-gtg">
-                                            <rect key="frame" x="93" y="3" width="214" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3U-dC-gtg">
+                                            <rect key="frame" x="93" y="3" width="179" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -47,15 +47,21 @@
                                             </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0UC-fe-y6r">
-                                            <rect key="frame" x="329" y="4" width="20" height="18"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0UC-fe-y6r">
+                                            <rect key="frame" x="294" y="4" width="20" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="18" id="MRE-Wx-jrG"/>
+                                                <constraint firstAttribute="width" constant="20" id="caB-CH-EkQ"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="yst-8B-FoB" firstAttribute="leading" secondItem="2yA-8w-tVV" secondAttribute="leadingMargin" id="5hs-Dw-LL9"/>
+                                        <constraint firstItem="0UC-fe-y6r" firstAttribute="leading" secondItem="v3U-dC-gtg" secondAttribute="trailing" constant="22" id="Frm-Kj-Emp"/>
                                         <constraint firstItem="Hyk-ks-k3E" firstAttribute="trailing" secondItem="2yA-8w-tVV" secondAttribute="trailingMargin" id="I7a-3A-QGO"/>
                                         <constraint firstItem="Hyk-ks-k3E" firstAttribute="leading" secondItem="yst-8B-FoB" secondAttribute="trailing" constant="9" id="SXF-qs-nD3"/>
                                         <constraint firstItem="361-fR-3fT" firstAttribute="leading" secondItem="yst-8B-FoB" secondAttribute="trailing" constant="9" id="gu3-Bf-t5R"/>
+                                        <constraint firstItem="v3U-dC-gtg" firstAttribute="leading" secondItem="2yA-8w-tVV" secondAttribute="leadingMargin" constant="85" id="m4h-Co-2Q0"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

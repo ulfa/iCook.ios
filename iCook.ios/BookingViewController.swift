@@ -22,10 +22,10 @@ class BookingViewController: UITableViewController{
     var menus: [Menu] = []
     let iconHaken = UIImage(named: "icon_haken.png") as UIImage?
     let iconAnfrage = UIImage(named: "anfrage.png") as UIImage?
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         // Do any additional setup after loading the view, typically from a nib.
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.delegate = self
@@ -33,27 +33,14 @@ class BookingViewController: UITableViewController{
         super.refreshControl = UIRefreshControl()
         super.refreshControl?.addTarget(self, action: Selector("refresh:"), forControlEvents: UIControlEvents.ValueChanged)
         let settings = appDelegate.loadSettings()
-        baseURI = settings["locationURI"]!
-        account = createAccount(settings["account"]!, passwd: settings["password"]!)
+        baseURI = settings[appDelegate.LOCATION]!
+        account = createAccount(settings[appDelegate.ACCOUNT]!, passwd: settings[appDelegate.PASSWORD]!)
         initBookings()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    func checkSettings(settings: Dictionary<String, String>) -> Int{
-        if settings.isEmpty {
-            return -1
-        } else if settings["locationURI"] == nil {
-            return -2
-        } else if settings["account"] == nil {
-            return -3
-        } else if settings["password"] == nil {
-            return -4
-        }
-        return 0
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

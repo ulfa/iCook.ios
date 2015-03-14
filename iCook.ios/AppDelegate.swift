@@ -14,12 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let SERVICE = "icook"
     let USERACCOUNT = "userAccout"
-
+    let LOCATION = "locationURI"
+    let ACCOUNT = "account"
+    let PASSWORD = "password"
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         if checkSettings(loadSettings()) != 0 {
-            println(".......... error checking settings")
             if let tabBarController = self.window!.rootViewController as? UITabBarController {
                 tabBarController.selectedIndex = 1
                 
@@ -63,11 +64,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func checkSettings(settings: Dictionary<String, String>) -> Int{
         if settings.isEmpty {
             return -1
-        } else if settings["locationURI"] == nil  {
+        } else if settings[LOCATION] == nil  {
             return -2
-        } else if settings["account"] == nil {
+        } else if settings[ACCOUNT] == nil {
             return -3
-        } else if settings["password"] == nil {
+        } else if settings[PASSWORD] == nil {
             return -4
         }
         return 0

@@ -26,8 +26,9 @@ class BookingViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        // Do any additional setup after loading the view, typically from a nib.
+        //customizeView()
         tableView.delegate = self
         tableView.dataSource = self
         super.refreshControl = UIRefreshControl()
@@ -38,6 +39,13 @@ class BookingViewController: UITableViewController{
         initBookings()
     }
 
+    func customizeView() {
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        self.tableView.backgroundColor = UIColor.lightTextColor()
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.tabBarController?.tabBar.barTintColor = UIColor.redColor()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

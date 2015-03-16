@@ -19,7 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let PASSWORD = "password"
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        //application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert |
+     //       UIUserNotificationType.Badge, categories: nil))
+        
         if checkSettings(loadSettings()) != 0 {
             if let tabBarController = self.window!.rootViewController as? UITabBarController {
                 tabBarController.selectedIndex = 1
@@ -27,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
+        
         return true
     }
 

@@ -177,6 +177,23 @@
 			name = Locksmith;
 			sourceTree = "<group>";
 		};
+		8A6D219C1AB689D400A7AE56 /* Booking */ = {
+			isa = PBXGroup;
+			children = (
+				8A368CC41AAE08CF00B19D69 /* BookingCell.swift */,
+				8A8C9C3A1AAC1A5700F890A9 /* BookingViewController.swift */,
+			);
+			name = Booking;
+			sourceTree = "<group>";
+		};
+		8A6D219D1AB689E200A7AE56 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8A6D21921AB0291F00A7AE56 /* SettingsViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		8A8C9C2A1AAC1A5700F890A9 = {
 			isa = PBXGroup;
 			children = (
@@ -200,15 +217,14 @@
 		8A8C9C351AAC1A5700F890A9 /* iCook.ios */ = {
 			isa = PBXGroup;
 			children = (
-				8A368CC41AAE08CF00B19D69 /* BookingCell.swift */,
 				8A6D218B1AB028F000A7AE56 /* Locksmith */,
 				8A8C9C381AAC1A5700F890A9 /* AppDelegate.swift */,
-				8A8C9C3A1AAC1A5700F890A9 /* BookingViewController.swift */,
+				8A6D219C1AB689D400A7AE56 /* Booking */,
 				8A8C9C3E1AAC1A5700F890A9 /* Main.storyboard */,
 				8A8C9C411AAC1A5700F890A9 /* Images.xcassets */,
 				8A8C9C431AAC1A5700F890A9 /* LaunchScreen.xib */,
 				8A8C9C361AAC1A5700F890A9 /* Supporting Files */,
-				8A6D21921AB0291F00A7AE56 /* SettingsViewController.swift */,
+				8A6D219D1AB689E200A7AE56 /* Settings */,
 			);
 			path = iCook.ios;
 			sourceTree = "<group>";
@@ -561,11 +577,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEPLOYMENT_LOCATION = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = iCook.ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -574,11 +593,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEPLOYMENT_LOCATION = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = iCook.ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = Release;
 		};

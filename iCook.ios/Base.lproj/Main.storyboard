@@ -54,6 +54,12 @@
                                                 <constraint firstAttribute="width" constant="20" id="caB-CH-EkQ"/>
                                             </constraints>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Freie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIt-Fw-14Z">
+                                            <rect key="frame" x="27" y="97" width="37.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="yst-8B-FoB" firstAttribute="leading" secondItem="2yA-8w-tVV" secondAttribute="leadingMargin" id="5hs-Dw-LL9"/>
@@ -69,6 +75,7 @@
                                     <outlet property="bookinDate" destination="v3U-dC-gtg" id="Arl-Nt-rMH"/>
                                     <outlet property="bookinImage" destination="yst-8B-FoB" id="j3d-T8-ZaZ"/>
                                     <outlet property="bookingDetails" destination="Hyk-ks-k3E" id="MAx-7M-DXc"/>
+                                    <outlet property="bookingFreeMeals" destination="NIt-Fw-14Z" id="gPN-4C-Awb"/>
                                     <outlet property="bookingTitle" destination="361-fR-3fT" id="Ghf-oc-O4D"/>
                                 </connections>
                             </tableViewCell>

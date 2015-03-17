@@ -9,6 +9,8 @@
 import UIKit
 import XCTest
 
+import iCook_ios
+
 class iCook_iosTests: XCTestCase {
     
     override func setUp() {

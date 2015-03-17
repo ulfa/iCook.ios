@@ -10,6 +10,7 @@ import UIKit
 
 class BookingCell: UITableViewCell {
 
+    @IBOutlet var bookingFreeMeals: UILabel!
     @IBOutlet var bookingDetails: UILabel!
     @IBOutlet var bookinDate: UILabel!
     @IBOutlet var bookinImage: UIImageView!

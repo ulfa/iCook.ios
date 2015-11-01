@@ -219,11 +219,12 @@ class BookingViewController: UITableViewController{
     }
     
     func sendRequest(url: String, parameters: [String: AnyObject]) {
-        Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = [
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Authorization": "Basic " + self.account
+        let headers = [
+            "Authorization": "Basic " + self.account,
+            "Accept": "application/json"
         ]
-        Alamofire.request(.POST, url, parameters: parameters).response{
+
+        Alamofire.request(.POST, url, parameters: parameters, headers: headers).response{
             (request, response, data, error) in
             self.initBookings()
         }

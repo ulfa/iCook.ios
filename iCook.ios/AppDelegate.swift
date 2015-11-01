@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Locksmith
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,9 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let ACCOUNT = "account"
     let PASSWORD = "password"
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) throws -> Bool {
         
-        if checkSettings(loadSettings()) != 0 {
+        if try checkSettings(loadSettings()) != 0 {
             if let tabBarController = self.window!.rootViewController as? UITabBarController {
                 tabBarController.selectedIndex = 1
                 
@@ -55,9 +56,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func loadSettings() -> Dictionary<String, String> {
         var settings: Dictionary<String, String> = Dictionary()
-        let (data, error) = Locksmith.loadDataForUserAccount(USERACCOUNT, inService: SERVICE)
-        if data != nil {
-            settings = data as Dictionary
+        do {
+            let data =  try Locksmith.loadDataForUserAccount(USERACCOUNT)
+                if data != nil && !data!.isEmpty {
+                    settings = data! as! Dictionary<String, String>
+                } else {
+                    settings = [LOCATION: "", ACCOUNT: "", PASSWORD: ""]
+            }
+        } catch let error as NSError {
+            print(error)
         }
         return settings
     }

@@ -22,7 +22,7 @@ class BookingViewController: UITableViewController{
     var menus: [Menu] = []
     let iconHaken = UIImage(named: "icon_haken.png") as UIImage?
     let iconAnfrage = UIImage(named: "anfrage.png") as UIImage?
-    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +60,7 @@ class BookingViewController: UITableViewController{
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(bookingCellIdentifier, forIndexPath: indexPath) as BookingCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(bookingCellIdentifier, forIndexPath: indexPath) as! BookingCell
         cell.bookinDate.text = menus[indexPath.row].convertDate()
         cell.bookingTitle.text = menus[indexPath.row].title
         cell.bookingTitle.font = UIFont(name:"HelveticaNeue-Bold", size: 24)
@@ -96,7 +96,7 @@ class BookingViewController: UITableViewController{
     //UITableViewDelegate
    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        var cell = tableView.cellForRowAtIndexPath(indexPath) as BookingCell?
+        _ = tableView.cellForRowAtIndexPath(indexPath) as! BookingCell?
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -115,25 +115,29 @@ class BookingViewController: UITableViewController{
     }
     
     func initBookings() {
-        var lMenus: [Menu] = []
-        Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders = [
-            "Accept": "application/json",
-            "Authorization": "Basic " + self.account
+        let headers = [
+            "Authorization": "Basic " + self.account,
+            "Accept": "application/json"
         ]
-        Alamofire.request(.GET, baseURI + url)
-            .responseJSON { (request, response, Json, error) in
-                if response != nil {
-                    let json = JSON(Json!)
-                    var eater = json["eater_id"].stringValue
-                    self.menus = self.createMenus(json["menus"], eater: eater)
-                    self.tableView.reloadData()
+        
+        Alamofire.request(.GET, baseURI + url, headers: headers)
+            .responseJSON {response in
+                switch response.result {
+                    case .Success(let data):
+                        let json = JSON(data)
+                        let eater = json["eater_id"].stringValue
+                        self.menus = self.createMenus(json["menus"], eater: eater)
+                        self.tableView.reloadData()
+                    case .Failure(let error):
+                        print(response.debugDescription)
+                        print("Request failed with error: \(error)")
                 }
             }
     }
     
     func createMenus(data: JSON, eater: String) -> [Menu]{
         var menus: [Menu] = []
-        for (key: String, subJson: JSON) in data {
+        for (_, subJson) in data {
             menus.append(createMenu(subJson, eater: eater))
         }
         return menus
@@ -141,7 +145,7 @@ class BookingViewController: UITableViewController{
     
     func createBookings(data: JSON) -> [String] {
         var bookings: [String] = []
-        for (key: String, subJson: JSON) in data {
+        for (_, subJson)  in data {
             bookings.append(subJson["eater"].stringValue)
         }
         return bookings
@@ -149,54 +153,54 @@ class BookingViewController: UITableViewController{
 
     func createRequesters(data: JSON) -> [String] {
         var requesters: [String] = []
-        for (key: String, subJson: JSON) in data {
+        for (_, subJson) in data {
             requesters.append(subJson["requester"].stringValue)
         }
         return requesters
     }
 
     func createMenu(data: JSON, eater: String) -> Menu {
-        var id  = data["menu"]["id"].stringValue
-        var date = data["menu"]["date"].stringValue
-        var slots = data["menu"]["slots"].stringValue
-        var countGiven = data["free_slots"].stringValue
-        var title = data["dish"]["title"].stringValue
-        var details = data["dish"]["details"].stringValue
-        var vegetarian =  data["dish"]["vegetarian"].boolValue
-        var bookings = createBookings(data["bookings"])
-        var eaterNames = data["eater_name"].stringValue
-        var requesters = createRequesters(data["requesters"])
+        let id  = data["menu"]["id"].stringValue
+        let date = data["menu"]["date"].stringValue
+        let slots = data["menu"]["slots"].stringValue
+        let countGiven = data["free_slots"].stringValue
+        let title = data["dish"]["title"].stringValue
+        let details = data["dish"]["details"].stringValue
+        let vegetarian =  data["dish"]["vegetarian"].boolValue
+        let bookings = createBookings(data["bookings"])
+        let eaterNames = data["eater_name"].stringValue
+        let requesters = createRequesters(data["requesters"])
         return Menu(id: id, date: date, slots: slots, countGiven: countGiven, title: title, details: details, vegetarian: vegetarian, eater: eater, bookings: bookings, eaterNames: eaterNames, requesters: requesters)
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?  {
-        var stornoAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Stornieren" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?  {
+        let stornoAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Stornieren" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
 
-            var parameters = ["eater-id": self.menus[indexPath.row].eater,
+            let parameters = ["eater-id": self.menus[indexPath.row].eater,
                               "menu-id": self.menus[indexPath.row].id
                              ]
             self.sendRequest(self.baseURI + self.stornoUrl, parameters: parameters)
         })
 
-        var anfrageAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Anfragen" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let anfrageAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Anfragen" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
 
-            var parameters = ["eater-id": self.menus[indexPath.row].eater,
+            let parameters = ["eater-id": self.menus[indexPath.row].eater,
                               "menu-id": self.menus[indexPath.row].id
                              ]
             
             self.sendRequest(self.baseURI + self.requestUrl, parameters: parameters)
         })
 
-        var bookingAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Buchen" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let bookingAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Buchen" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             
-            var parameters = ["eater-id": self.menus[indexPath.row].eater,
+            let parameters = ["eater-id": self.menus[indexPath.row].eater,
                               "menu-id": self.menus[indexPath.row].id
                              ]
             
             self.sendRequest(self.baseURI + self.bookingUrl, parameters: parameters)
         })
         
-        var esserAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Esser" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let esserAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Esser" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             self.createAllEaterView(self.menus[indexPath.row].eaterNames)
         })
         esserAction.backgroundColor = UIColor.lightGrayColor()
@@ -206,7 +210,7 @@ class BookingViewController: UITableViewController{
 
         if (self.menus[indexPath.row].allreadybooked() && self.menus[indexPath.row].isInTime()) {
             return [esserAction, stornoAction]
-        } else if (self.menus[indexPath.row].countGiven.toInt() > 0 && self.menus[indexPath.row].isInTime()) {
+        } else if (Int(self.menus[indexPath.row].countGiven) > 0 && self.menus[indexPath.row].isInTime()) {
             return [esserAction, bookingAction]
         } else if (self.menus[indexPath.row].isInTime()) {
             return [esserAction, anfrageAction]
@@ -226,7 +230,7 @@ class BookingViewController: UITableViewController{
     }
     
     func createAllEaterView(eaterNames: String) {
-        var alert = UIAlertController(title: "Esser", message: eaterNames, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Esser", message: eaterNames, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
@@ -234,7 +238,7 @@ class BookingViewController: UITableViewController{
     func createAccount(account: String, passwd: String) -> String {
         let plainString = account + ":" + passwd as NSString
         let plainData = plainString.dataUsingEncoding(NSUTF8StringEncoding)
-        let base64String =  plainData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.init(0))
+        let base64String =  plainData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.init(rawValue: 0))
         return base64String!
     }
 

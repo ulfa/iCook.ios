@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Locksmith
 
 class SettingsViewController: UITableViewController, UITextFieldDelegate{
     
@@ -16,12 +17,12 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate{
     @IBOutlet var accountTest: UITextField!
         
     var settings: Dictionary<String, String> = Dictionary()
-    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        var settings = loadSettings() as Dictionary<String, String>
+        let settings = loadSettings() as Dictionary<String, String>
         passwordText.secureTextEntry = true
         locationText.text = settings[appDelegate.LOCATION]
         accountTest.text = settings[appDelegate.ACCOUNT]
@@ -41,32 +42,41 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate{
     }
     
     @IBAction func savePassword(sender: UITextField) {
-            settings = [appDelegate.LOCATION: locationText.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()),
-                        appDelegate.ACCOUNT: accountTest.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()),
-                        appDelegate.PASSWORD: sender.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            settings = [appDelegate.LOCATION: locationText.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()),
+                        appDelegate.ACCOUNT: accountTest.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()),
+                        appDelegate.PASSWORD: sender.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
                         ]
-            saveSettings(settings)
+                saveSettings(settings)
     }
     
-    func saveSettings(settings: Dictionary<String, String>) -> NSError? {
-        let error = Locksmith.updateData(settings, forUserAccount: appDelegate.USERACCOUNT, inService: appDelegate.SERVICE)
-        return error
+    
+    func saveSettings(settings: Dictionary<String, String>) {
+        do {
+            try Locksmith.updateData(settings, forUserAccount: appDelegate.USERACCOUNT)
+        } catch let error as NSError {
+            print(error.description)
+        }
     }
     
     func loadSettings() -> Dictionary<String, String> {
         var settings: Dictionary<String, String> = Dictionary()
-        let (data, error) = Locksmith.loadDataForUserAccount(appDelegate.USERACCOUNT, inService: appDelegate.SERVICE)
+        let data = Locksmith.loadDataForUserAccount(appDelegate.USERACCOUNT)
         if data != nil {
-            settings = data as Dictionary
+            settings = data! as! Dictionary<String, String>
         } else {
-            settings = [appDelegate.LOCATION: "", appDelegate.ACCOUNT: "", appDelegate.PASSWORD: ""]
-            let error = Locksmith.saveData(settings, forUserAccount: appDelegate.USERACCOUNT, inService: appDelegate.SERVICE)
+            do {
+                settings = [appDelegate.LOCATION: "", appDelegate.ACCOUNT: "", appDelegate.PASSWORD: ""]
+                try Locksmith.saveData(settings, forUserAccount: appDelegate.USERACCOUNT)
+            } catch let error as NSError {
+                print(error.description)
+            }
         }
+
         return settings
 
     }
     
-    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+    @objc func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.view.endEditing(true);
         return false;
     }

@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8A368CC01AAD7BF300B19D69 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A368CB91AAD7BE100B19D69 /* SwiftyJSON.framework */; };
-		8A368CC11AAD7BF300B19D69 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A368CB91AAD7BE100B19D69 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8A368CC51AAE08CF00B19D69 /* BookingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A368CC41AAE08CF00B19D69 /* BookingCell.swift */; };
+		8A544D431BE615F300F3E4D4 /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9489AB1BE25EF00011BDBA /* Locksmith.framework */; };
+		8A544D531BE6169300F3E4D4 /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9489AB1BE25EF00011BDBA /* Locksmith.framework */; };
+		8A544D541BE6169300F3E4D4 /* Locksmith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9489AB1BE25EF00011BDBA /* Locksmith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8A6D21931AB0291F00A7AE56 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D21921AB0291F00A7AE56 /* SettingsViewController.swift */; };
-		8A6D219F1AB7EBFA00A7AE56 /* Locksmith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C9C6E1AAC1AC100F890A9 /* Locksmith.swift */; };
-		8A6D21A01AB7EC0600A7AE56 /* LocksmithRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C9C6F1AAC1AC100F890A9 /* LocksmithRequest.swift */; };
 		8A6D21AC1AB7F58C00A7AE56 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D21AB1AB7F58C00A7AE56 /* Menu.swift */; };
 		8A8C9C391AAC1A5700F890A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C9C381AAC1A5700F890A9 /* AppDelegate.swift */; };
 		8A8C9C3B1AAC1A5700F890A9 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C9C3A1AAC1A5700F890A9 /* BookingViewController.swift */; };
@@ -22,45 +21,18 @@
 		8A8C9C511AAC1A5700F890A9 /* iCook_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C9C501AAC1A5700F890A9 /* iCook_iosTests.swift */; };
 		8A8C9C691AAC1A9700F890A9 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8C9C621AAC1A8800F890A9 /* Alamofire.framework */; };
 		8A8C9C6A1AAC1A9700F890A9 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8C9C621AAC1A8800F890A9 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8A8C9C701AAC1AC100F890A9 /* Locksmith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C9C6E1AAC1AC100F890A9 /* Locksmith.swift */; };
-		8A8C9C711AAC1AC100F890A9 /* LocksmithRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8C9C6F1AAC1AC100F890A9 /* LocksmithRequest.swift */; };
+		8A9489BE1BE260BF0011BDBA /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9489711BE25EA00011BDBA /* SwiftyJSON.framework */; };
+		8A9489C01BE262430011BDBA /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9489711BE25EA00011BDBA /* SwiftyJSON.framework */; };
+		8A9489C11BE262430011BDBA /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8A9489711BE25EA00011BDBA /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8A368CB81AAD7BE100B19D69 /* PBXContainerItemProxy */ = {
+		8A544D551BE6169300F3E4D4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 8A368CB11AAD7BE100B19D69 /* SwiftyJSON.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2E4FEFDB19575BE100351305;
-			remoteInfo = SwiftyJSON;
-		};
-		8A368CBA1AAD7BE100B19D69 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8A368CB11AAD7BE100B19D69 /* SwiftyJSON.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2E4FEFE619575BE100351305;
-			remoteInfo = SwiftyJSONTests;
-		};
-		8A368CBC1AAD7BE100B19D69 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8A368CB11AAD7BE100B19D69 /* SwiftyJSON.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4EC1C1C91A0C1A2D0026ED0B;
-			remoteInfo = SwiftyJSONOSX;
-		};
-		8A368CBE1AAD7BE100B19D69 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8A368CB11AAD7BE100B19D69 /* SwiftyJSON.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4EC1C1D31A0C1A2D0026ED0B;
-			remoteInfo = SwiftyJSONOSXTests;
-		};
-		8A368CC21AAD7BF300B19D69 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8A368CB11AAD7BE100B19D69 /* SwiftyJSON.xcodeproj */;
+			containerPortal = 8A9489A21BE25EF00011BDBA /* Locksmith.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 2E4FEFDA19575BE100351305;
-			remoteInfo = SwiftyJSON;
+			remoteGlobalIDString = 0EC25C581BA385AA004191AF;
+			remoteInfo = "Locksmith iOS";
 		};
 		8A8C9C4B1AAC1A5700F890A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -104,6 +76,118 @@
 			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
 			remoteInfo = "Alamofire iOS";
 		};
+		8A94895C1BE25DC10011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A8C9C5A1AAC1A8800F890A9 /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CF626EF1BA7CB3E0011A099;
+			remoteInfo = "Alamofire tvOS";
+		};
+		8A94895E1BE25DC10011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A8C9C5A1AAC1A8800F890A9 /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CF626F81BA7CB3E0011A099;
+			remoteInfo = "Alamofire tvOS Tests";
+		};
+		8A9489601BE25DC10011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A8C9C5A1AAC1A8800F890A9 /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E4202FE01B667AA100C997FB;
+			remoteInfo = "Alamofire watchOS";
+		};
+		8A9489701BE25EA00011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A9489661BE25EA00011BDBA /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2E4FEFDB19575BE100351305;
+			remoteInfo = "SwiftyJSON iOS";
+		};
+		8A9489721BE25EA00011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A9489661BE25EA00011BDBA /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2E4FEFE619575BE100351305;
+			remoteInfo = "SwiftyJSON iOS Tests";
+		};
+		8A9489741BE25EA00011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A9489661BE25EA00011BDBA /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C7DFC5B1A9102BD005AA3F7;
+			remoteInfo = "SwiftyJSON OSX";
+		};
+		8A9489761BE25EA00011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A9489661BE25EA00011BDBA /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C7DFC651A9102BD005AA3F7;
+			remoteInfo = "SwiftyJSON OSX Tests";
+		};
+		8A9489781BE25EA00011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A9489661BE25EA00011BDBA /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E4D7CCE81B9465A700EE7221;
+			remoteInfo = "SwiftyJSON watchOS";
+		};
+		8A94897A1BE25EA00011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A9489661BE25EA00011BDBA /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7236B4F61BAC14150020529B;
+			remoteInfo = "SwiftyJSON tvOS";
+		};
+		8A94897C1BE25EA00011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A9489661BE25EA00011BDBA /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A8580F741BCF5C5B00DA927B;
+			remoteInfo = "SwiftyJSON tvOS Tests";
+		};
+		8A9489AA1BE25EF00011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A9489A21BE25EF00011BDBA /* Locksmith.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0EC25C591BA385AA004191AF;
+			remoteInfo = "Locksmith iOS";
+		};
+		8A9489AC1BE25EF00011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A9489A21BE25EF00011BDBA /* Locksmith.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0EC25C621BA385AB004191AF;
+			remoteInfo = "Locksmith iOS Tests";
+		};
+		8A9489AE1BE25EF00011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A9489A21BE25EF00011BDBA /* Locksmith.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0EC25C751BA385F6004191AF;
+			remoteInfo = "Locksmith OS X";
+		};
+		8A9489B01BE25EF00011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A9489A21BE25EF00011BDBA /* Locksmith.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0EC25C7E1BA385F6004191AF;
+			remoteInfo = "Locksmith OS X Tests";
+		};
+		8A9489B21BE25EF00011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A9489A21BE25EF00011BDBA /* Locksmith.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0EC25CA71BA39C9F004191AF;
+			remoteInfo = "Locksmith watchOS";
+		};
+		8A9489C21BE262430011BDBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A9489661BE25EA00011BDBA /* SwiftyJSON.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E4FEFDA19575BE100351305;
+			remoteInfo = "SwiftyJSON iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -113,7 +197,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8A368CC11AAD7BF300B19D69 /* SwiftyJSON.framework in Embed Frameworks */,
+				8A544D541BE6169300F3E4D4 /* Locksmith.framework in Embed Frameworks */,
+				8A9489C11BE262430011BDBA /* SwiftyJSON.framework in Embed Frameworks */,
 				8A8C9C6A1AAC1A9700F890A9 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -122,7 +207,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8A368CB11AAD7BE100B19D69 /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyJSON.xcodeproj; path = ../SwiftyJSON/SwiftyJSON.xcodeproj; sourceTree = "<group>"; };
 		8A368CC41AAE08CF00B19D69 /* BookingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookingCell.swift; sourceTree = "<group>"; };
 		8A6D21921AB0291F00A7AE56 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8A6D21AB1AB7F58C00A7AE56 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
@@ -137,8 +221,8 @@
 		8A8C9C4F1AAC1A5700F890A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A8C9C501AAC1A5700F890A9 /* iCook_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCook_iosTests.swift; sourceTree = "<group>"; };
 		8A8C9C5A1AAC1A8800F890A9 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = ../Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
-		8A8C9C6E1AAC1AC100F890A9 /* Locksmith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Locksmith.swift; path = ../../Locksmith/Pod/Classes/Locksmith.swift; sourceTree = "<group>"; };
-		8A8C9C6F1AAC1AC100F890A9 /* LocksmithRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocksmithRequest.swift; path = ../../Locksmith/Pod/Classes/LocksmithRequest.swift; sourceTree = "<group>"; };
+		8A9489661BE25EA00011BDBA /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyJSON.xcodeproj; path = ../SwiftyJSON/SwiftyJSON.xcodeproj; sourceTree = "<group>"; };
+		8A9489A21BE25EF00011BDBA /* Locksmith.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Locksmith.xcodeproj; path = ../Locksmith/Locksmith.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +230,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A368CC01AAD7BF300B19D69 /* SwiftyJSON.framework in Frameworks */,
+				8A544D531BE6169300F3E4D4 /* Locksmith.framework in Frameworks */,
+				8A544D431BE615F300F3E4D4 /* Locksmith.framework in Frameworks */,
+				8A9489C01BE262430011BDBA /* SwiftyJSON.framework in Frameworks */,
+				8A9489BE1BE260BF0011BDBA /* SwiftyJSON.framework in Frameworks */,
 				8A8C9C691AAC1A9700F890A9 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,26 +248,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8A368CB21AAD7BE100B19D69 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8A368CB91AAD7BE100B19D69 /* SwiftyJSON.framework */,
-				8A368CBB1AAD7BE100B19D69 /* SwiftyJSONTests.xctest */,
-				8A368CBD1AAD7BE100B19D69 /* SwiftyJSON.framework */,
-				8A368CBF1AAD7BE100B19D69 /* SwiftyJSONOSXTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		8A6D218B1AB028F000A7AE56 /* Locksmith */ = {
-			isa = PBXGroup;
-			children = (
-				8A8C9C6E1AAC1AC100F890A9 /* Locksmith.swift */,
-				8A8C9C6F1AAC1AC100F890A9 /* LocksmithRequest.swift */,
-			);
-			name = Locksmith;
-			sourceTree = "<group>";
-		};
 		8A6D219C1AB689D400A7AE56 /* Booking */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,7 +269,8 @@
 		8A8C9C2A1AAC1A5700F890A9 = {
 			isa = PBXGroup;
 			children = (
-				8A368CB11AAD7BE100B19D69 /* SwiftyJSON.xcodeproj */,
+				8A9489A21BE25EF00011BDBA /* Locksmith.xcodeproj */,
+				8A9489661BE25EA00011BDBA /* SwiftyJSON.xcodeproj */,
 				8A8C9C5A1AAC1A8800F890A9 /* Alamofire.xcodeproj */,
 				8A8C9C351AAC1A5700F890A9 /* iCook.ios */,
 				8A8C9C4D1AAC1A5700F890A9 /* iCook.iosTests */,
@@ -222,7 +290,6 @@
 		8A8C9C351AAC1A5700F890A9 /* iCook.ios */ = {
 			isa = PBXGroup;
 			children = (
-				8A6D218B1AB028F000A7AE56 /* Locksmith */,
 				8A8C9C381AAC1A5700F890A9 /* AppDelegate.swift */,
 				8A6D219C1AB689D400A7AE56 /* Booking */,
 				8A8C9C3E1AAC1A5700F890A9 /* Main.storyboard */,
@@ -263,9 +330,38 @@
 			isa = PBXGroup;
 			children = (
 				8A8C9C621AAC1A8800F890A9 /* Alamofire.framework */,
-				8A8C9C641AAC1A8800F890A9 /* Alamofire.framework */,
 				8A8C9C661AAC1A8800F890A9 /* Alamofire iOS Tests.xctest */,
+				8A8C9C641AAC1A8800F890A9 /* Alamofire.framework */,
 				8A8C9C681AAC1A8800F890A9 /* Alamofire OSX Tests.xctest */,
+				8A94895D1BE25DC10011BDBA /* Alamofire.framework */,
+				8A94895F1BE25DC10011BDBA /* Alamofire tvOS Tests.xctest */,
+				8A9489611BE25DC10011BDBA /* Alamofire.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8A9489671BE25EA00011BDBA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8A9489711BE25EA00011BDBA /* SwiftyJSON.framework */,
+				8A9489731BE25EA00011BDBA /* SwiftyJSON iOS Tests.xctest */,
+				8A9489751BE25EA00011BDBA /* SwiftyJSON.framework */,
+				8A9489771BE25EA00011BDBA /* SwiftyJSON OSX Tests.xctest */,
+				8A9489791BE25EA00011BDBA /* SwiftyJSON.framework */,
+				8A94897B1BE25EA00011BDBA /* SwiftyJSON.framework */,
+				8A94897D1BE25EA00011BDBA /* SwiftyJSON tvOS Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8A9489A31BE25EF00011BDBA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8A9489AB1BE25EF00011BDBA /* Locksmith.framework */,
+				8A9489AD1BE25EF00011BDBA /* Locksmith iOS Tests.xctest */,
+				8A9489AF1BE25EF00011BDBA /* Locksmith.framework */,
+				8A9489B11BE25EF00011BDBA /* Locksmith OS X Tests.xctest */,
+				8A9489B31BE25EF00011BDBA /* Locksmith.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -286,7 +382,8 @@
 			);
 			dependencies = (
 				8A8C9C6C1AAC1A9700F890A9 /* PBXTargetDependency */,
-				8A368CC31AAD7BF300B19D69 /* PBXTargetDependency */,
+				8A9489C31BE262430011BDBA /* PBXTargetDependency */,
+				8A544D561BE6169300F3E4D4 /* PBXTargetDependency */,
 			);
 			name = iCook.ios;
 			productName = iCook.ios;
@@ -317,7 +414,7 @@
 		8A8C9C2B1AAC1A5700F890A9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Ulf Angermann";
 				TargetAttributes = {
 					8A8C9C321AAC1A5700F890A9 = {
@@ -347,8 +444,12 @@
 					ProjectRef = 8A8C9C5A1AAC1A8800F890A9 /* Alamofire.xcodeproj */;
 				},
 				{
-					ProductGroup = 8A368CB21AAD7BE100B19D69 /* Products */;
-					ProjectRef = 8A368CB11AAD7BE100B19D69 /* SwiftyJSON.xcodeproj */;
+					ProductGroup = 8A9489A31BE25EF00011BDBA /* Products */;
+					ProjectRef = 8A9489A21BE25EF00011BDBA /* Locksmith.xcodeproj */;
+				},
+				{
+					ProductGroup = 8A9489671BE25EA00011BDBA /* Products */;
+					ProjectRef = 8A9489661BE25EA00011BDBA /* SwiftyJSON.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -360,34 +461,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		8A368CB91AAD7BE100B19D69 /* SwiftyJSON.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftyJSON.framework;
-			remoteRef = 8A368CB81AAD7BE100B19D69 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		8A368CBB1AAD7BE100B19D69 /* SwiftyJSONTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SwiftyJSONTests.xctest;
-			remoteRef = 8A368CBA1AAD7BE100B19D69 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		8A368CBD1AAD7BE100B19D69 /* SwiftyJSON.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftyJSON.framework;
-			remoteRef = 8A368CBC1AAD7BE100B19D69 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		8A368CBF1AAD7BE100B19D69 /* SwiftyJSONOSXTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SwiftyJSONOSXTests.xctest;
-			remoteRef = 8A368CBE1AAD7BE100B19D69 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		8A8C9C621AAC1A8800F890A9 /* Alamofire.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -414,6 +487,111 @@
 			fileType = wrapper.cfbundle;
 			path = "Alamofire OSX Tests.xctest";
 			remoteRef = 8A8C9C671AAC1A8800F890A9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A94895D1BE25DC10011BDBA /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = 8A94895C1BE25DC10011BDBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A94895F1BE25DC10011BDBA /* Alamofire tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Alamofire tvOS Tests.xctest";
+			remoteRef = 8A94895E1BE25DC10011BDBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A9489611BE25DC10011BDBA /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = 8A9489601BE25DC10011BDBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A9489711BE25EA00011BDBA /* SwiftyJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyJSON.framework;
+			remoteRef = 8A9489701BE25EA00011BDBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A9489731BE25EA00011BDBA /* SwiftyJSON iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SwiftyJSON iOS Tests.xctest";
+			remoteRef = 8A9489721BE25EA00011BDBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A9489751BE25EA00011BDBA /* SwiftyJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyJSON.framework;
+			remoteRef = 8A9489741BE25EA00011BDBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A9489771BE25EA00011BDBA /* SwiftyJSON OSX Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SwiftyJSON OSX Tests.xctest";
+			remoteRef = 8A9489761BE25EA00011BDBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A9489791BE25EA00011BDBA /* SwiftyJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyJSON.framework;
+			remoteRef = 8A9489781BE25EA00011BDBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A94897B1BE25EA00011BDBA /* SwiftyJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyJSON.framework;
+			remoteRef = 8A94897A1BE25EA00011BDBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A94897D1BE25EA00011BDBA /* SwiftyJSON tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SwiftyJSON tvOS Tests.xctest";
+			remoteRef = 8A94897C1BE25EA00011BDBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A9489AB1BE25EF00011BDBA /* Locksmith.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Locksmith.framework;
+			remoteRef = 8A9489AA1BE25EF00011BDBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A9489AD1BE25EF00011BDBA /* Locksmith iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Locksmith iOS Tests.xctest";
+			remoteRef = 8A9489AC1BE25EF00011BDBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A9489AF1BE25EF00011BDBA /* Locksmith.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Locksmith.framework;
+			remoteRef = 8A9489AE1BE25EF00011BDBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A9489B11BE25EF00011BDBA /* Locksmith OS X Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Locksmith OS X Tests.xctest";
+			remoteRef = 8A9489B01BE25EF00011BDBA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8A9489B31BE25EF00011BDBA /* Locksmith.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Locksmith.framework;
+			remoteRef = 8A9489B21BE25EF00011BDBA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -443,10 +621,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A8C9C701AAC1AC100F890A9 /* Locksmith.swift in Sources */,
 				8A6D21931AB0291F00A7AE56 /* SettingsViewController.swift in Sources */,
 				8A6D21AC1AB7F58C00A7AE56 /* Menu.swift in Sources */,
-				8A8C9C711AAC1AC100F890A9 /* LocksmithRequest.swift in Sources */,
 				8A8C9C391AAC1A5700F890A9 /* AppDelegate.swift in Sources */,
 				8A8C9C3B1AAC1A5700F890A9 /* BookingViewController.swift in Sources */,
 				8A368CC51AAE08CF00B19D69 /* BookingCell.swift in Sources */,
@@ -457,8 +633,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A6D219F1AB7EBFA00A7AE56 /* Locksmith.swift in Sources */,
-				8A6D21A01AB7EC0600A7AE56 /* LocksmithRequest.swift in Sources */,
 				8A8C9C511AAC1A5700F890A9 /* iCook_iosTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,10 +640,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8A368CC31AAD7BF300B19D69 /* PBXTargetDependency */ = {
+		8A544D561BE6169300F3E4D4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SwiftyJSON;
-			targetProxy = 8A368CC21AAD7BF300B19D69 /* PBXContainerItemProxy */;
+			name = "Locksmith iOS";
+			targetProxy = 8A544D551BE6169300F3E4D4 /* PBXContainerItemProxy */;
 		};
 		8A8C9C4C1AAC1A5700F890A9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -480,6 +654,11 @@
 			isa = PBXTargetDependency;
 			name = "Alamofire iOS";
 			targetProxy = 8A8C9C6B1AAC1A9700F890A9 /* PBXContainerItemProxy */;
+		};
+		8A9489C31BE262430011BDBA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SwiftyJSON iOS";
+			targetProxy = 8A9489C21BE262430011BDBA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -523,6 +702,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -589,8 +769,9 @@
 				DEPLOYMENT_LOCATION = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = iCook.ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "innoQ-GmbH.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -605,8 +786,9 @@
 				DEPLOYMENT_LOCATION = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = iCook.ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "innoQ-GmbH.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -626,7 +808,9 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = iCook.iosTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "innoQ-GmbH.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iCook.ios.app/iCook.ios";
 			};
@@ -641,7 +825,9 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = iCook.iosTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "innoQ-GmbH.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iCook.ios.app/iCook.ios";
 			};

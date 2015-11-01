@@ -39,12 +39,12 @@ class Menu {
     func isInTime() -> Bool {
         dateFormatter.dateFormat = "MMMM dd, yyyy hh:mm:ss"
         dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        var d1: NSDate = dateFormatter.dateFromString(date)!
+        let d1: NSDate = dateFormatter.dateFromString(date)!
         
         dateFormatter.dateFormat = "dd.MM.yyyy"
-        var d2: String = dateFormatter.stringFromDate(NSDate()) + " 12:00:00"
+        let d2: String = dateFormatter.stringFromDate(NSDate()) + " 12:00:00"
         dateFormatter.dateFormat = "dd.MM.yy hh:mm:ss"
-        var d3: NSDate = dateFormatter.dateFromString(d2)!
+        let d3: NSDate = dateFormatter.dateFromString(d2)!
         return d1.timeIntervalSinceDate(d3) > 0
     }
     
@@ -62,15 +62,15 @@ class Menu {
     
     
     func allreadybooked() -> Bool{
-        return contains(bookings, eater)
+        return bookings.contains(eater)
     }
     
     func getSlotCount() -> Int {
-        return slots.toInt()!
+        return Int(slots)!
     }
     
     func isRequester() -> Bool {
-        return contains(requesters, eater)
+        return requesters.contains(eater)
     }
     
 }

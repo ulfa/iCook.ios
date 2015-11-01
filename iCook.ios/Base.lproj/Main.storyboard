@@ -23,7 +23,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="124.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="icook" translatesAutoresizingMaskIntoConstraints="NO" id="yst-8B-FoB">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="food" translatesAutoresizingMaskIntoConstraints="NO" id="yst-8B-FoB">
                                             <rect key="frame" x="8" y="17" width="76" height="75.5"/>
                                             <animations/>
                                         </imageView>
@@ -305,7 +305,7 @@
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
-        <image name="icook" width="75" height="75"/>
+        <image name="food" width="72" height="72"/>
         <image name="second" width="30" height="30"/>
     </resources>
 </document>

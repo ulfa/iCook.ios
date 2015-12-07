@@ -33,9 +33,13 @@ class BookingViewController: UITableViewController{
         tableView.dataSource = self
         super.refreshControl = UIRefreshControl()
         super.refreshControl?.addTarget(self, action: Selector("refresh:"), forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         let settings = appDelegate.loadSettings()
         baseURI = settings[appDelegate.LOCATION]!
-        account = createAccount(settings[appDelegate.ACCOUNT]!, passwd: settings[appDelegate.PASSWORD]!)
+        account = appDelegate.createAccount(settings[appDelegate.ACCOUNT]!, passwd: settings[appDelegate.PASSWORD]!)
         initBookings()
     }
 
@@ -115,6 +119,7 @@ class BookingViewController: UITableViewController{
     }
     
     func initBookings() {
+        
         let headers = [
             "Authorization": "Basic " + self.account,
             "Accept": "application/json"
@@ -235,13 +240,5 @@ class BookingViewController: UITableViewController{
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
-    
-    func createAccount(account: String, passwd: String) -> String {
-        let plainString = account + ":" + passwd as NSString
-        let plainData = plainString.dataUsingEncoding(NSUTF8StringEncoding)
-        let base64String =  plainData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.init(rawValue: 0))
-        return base64String!
-    }
-
     
 }

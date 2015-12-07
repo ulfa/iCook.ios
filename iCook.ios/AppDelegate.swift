@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 import Locksmith
 
 @UIApplicationMain
@@ -19,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let ACCOUNT = "account"
     let PASSWORD = "password"
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) throws -> Bool {
+    @objc func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?)  -> Bool {
         
         if try checkSettings(loadSettings()) != 0 {
             if let tabBarController = self.window!.rootViewController as? UITabBarController {
@@ -27,9 +28,72 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             }
         }
-
-        
+        //
+        // init of the notificationservice
+        //
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        UIApplication.sharedApplication().registerForRemoteNotifications()
         return true
+    }
+    
+    
+    func application( application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData ) {
+        let characterSet: NSCharacterSet = NSCharacterSet( charactersInString: "<>" )
+        
+        let deviceTokenString: String = ( deviceToken.description as NSString )
+            .stringByTrimmingCharactersInSet( characterSet )
+            .stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
+        
+        print( deviceTokenString )
+        let parameters = ["device_token": deviceTokenString]
+        let settings = loadSettings()
+        let headers = createHeader(settings, account: settings[ACCOUNT]!, passwd: settings[PASSWORD]!)
+        let url = settings[LOCATION]! + "/apns/register"
+        Alamofire.request(.POST, url, parameters: parameters, headers: headers).response{
+            (request, response, data, error) in
+            print(response)
+        }
+    }
+    
+    func createHeader(settings: Dictionary<String, String>, account: String, passwd: String) -> [String:String] {
+        let headers = [
+            "Authorization": "Basic " + createAccount(settings[ACCOUNT]!, passwd: settings[PASSWORD]!),
+            "Accept": "application/json"
+        ]
+        return headers
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("Device token for push notifications: FAIL -- ")
+        print(error.description)
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        // display the userInfo
+        if let notification = userInfo["aps"] as? NSDictionary,
+            let alert = notification["alert"] as? String {
+                let alertCtrl = UIAlertController(title: "iCook", message: alert as String, preferredStyle: UIAlertControllerStyle.Alert)
+                alertCtrl.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                // Find the presented VC...
+                var presentedVC = self.window?.rootViewController
+                while (presentedVC!.presentedViewController != nil)  {
+                    presentedVC = presentedVC!.presentedViewController
+                }
+                presentedVC!.presentViewController(alertCtrl, animated: true, completion: nil)
+                
+                // call the completion handler
+                // -- pass in NoData, since no new data was fetched from the server.
+                completionHandler(UIBackgroundFetchResult.NoData)
+        }
+    }
+    
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        print("didReceiveRemoteNotification")
+        if let msg = userInfo["msg"] as? NSObject {
+            print(msg)
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -81,6 +145,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return 0
     }
+    
+    func createAccount(account: String, passwd: String) -> String {
+        let plainString = account + ":" + passwd as NSString
+        let plainData = plainString.dataUsingEncoding(NSUTF8StringEncoding)
+        let base64String =  plainData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.init(rawValue: 0))
+        return base64String!
+    }
+
 
 
 

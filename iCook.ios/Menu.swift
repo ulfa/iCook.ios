@@ -9,7 +9,7 @@
 import Foundation
 
 class Menu {
-    var dateFormatter = NSDateFormatter()
+    var dateFormatter = DateFormatter()
     var title: String
     var details: String
     var vegetarian: Bool
@@ -21,8 +21,9 @@ class Menu {
     var bookings : [String]
     var eaterNames : String
     var requesters :[String]
+    var vegieCount : String
     
-    init(id: String, date: String, slots: String, countGiven: String, title: String, details: String, vegetarian: Bool, eater: String, bookings: [String], eaterNames: String, requesters: [String]) {
+    init(id: String, date: String, slots: String, countGiven: String, title: String, details: String, vegetarian: Bool, eater: String, bookings: [String], eaterNames: String, requesters: [String], vegieCount: String) {
         self.id = id
         self.date = date
         self.slots = slots
@@ -34,30 +35,35 @@ class Menu {
         self.bookings = bookings
         self.eaterNames = eaterNames
         self.requesters = requesters
+        self.vegieCount = vegieCount
     }
     
     func isInTime() -> Bool {
         dateFormatter.dateFormat = "MMMM dd, yyyy hh:mm:ss"
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        let d1: NSDate = dateFormatter.dateFromString(date)!
+        //dateFormatter.dateFormat = "yyyy-MM-dd'T'hh:mm:ssZ"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        let d1: Date = dateFormatter.date(from: date)!
         
         dateFormatter.dateFormat = "dd.MM.yyyy"
-        let d2: String = dateFormatter.stringFromDate(NSDate()) + " 12:00:00"
+        let d2: String = dateFormatter.string(from: Date()) + " 12:00:00"
         dateFormatter.dateFormat = "dd.MM.yy hh:mm:ss"
-        let d3: NSDate = dateFormatter.dateFromString(d2)!
-        return d1.timeIntervalSinceDate(d3) > 0
+        let d3: Date = dateFormatter.date(from: d2)!
+        return d1.timeIntervalSince(d3) > 0
     }
     
     func convertDate() -> String {
-        let dateFormatter1 = NSDateFormatter()
+        let dateFormatter1 = DateFormatter()
         dateFormatter1.dateFormat = "MMMM dd, yyyy hh:mm:ss"
-        dateFormatter1.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        let d1 = dateFormatter1.dateFromString(date)
-        
-        let dateFormatter2 = NSDateFormatter()
-        dateFormatter2.locale = NSLocale(localeIdentifier: "de_DE_POSIX")
+        //dateFormatter1.dateFormat = "yyyy-MM-dd'T'hh:mm:ssZ"
+        dateFormatter1.locale = Locale(identifier: "en_US_POSIX")
+        print(date)
+        let d1 = dateFormatter1.date(from: date)
+        print(d1)
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.locale = Locale(identifier: "de_DE_POSIX")
         dateFormatter2.dateFormat = "dd.MM.yyyy (EEEE)"
-        return dateFormatter2.stringFromDate(d1!)
+        print(date)
+        return dateFormatter2.string(from: d1!)
     }
     
     

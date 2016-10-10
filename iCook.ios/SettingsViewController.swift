@@ -17,13 +17,13 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate{
     @IBOutlet var accountTest: UITextField!
         
     var settings: Dictionary<String, String> = Dictionary()
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         let settings = loadSettings() as Dictionary<String, String>
-        passwordText.secureTextEntry = true
+        passwordText.isSecureTextEntry = true
         locationText.text = settings[appDelegate.LOCATION]
         accountTest.text = settings[appDelegate.ACCOUNT]
         passwordText.text = settings[appDelegate.PASSWORD]
@@ -35,48 +35,57 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate{
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func saveLocationURI(sender: UITextField) {
+    @IBAction func saveLocationURI(_ sender: UITextField) {
+        print("saveLocationURI")
     }
     
-    @IBAction func saveAccount(sender: UITextField) {
+    @IBAction func saveAccount(_ sender: UITextField) {
+        print("saveAccount")
     }
     
-    @IBAction func savePassword(sender: UITextField) {
-            settings = [appDelegate.LOCATION: locationText.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()),
-                        appDelegate.ACCOUNT: accountTest.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()),
-                        appDelegate.PASSWORD: sender.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-                        ]
-                saveSettings(settings)
+    @IBAction func savePassword(_ sender: UITextField) {
+        print("savePassword")
+        print(settings)
+        settings = [appDelegate.LOCATION: locationText.text!.trimmingCharacters(in: CharacterSet.whitespaces),
+                    appDelegate.ACCOUNT: accountTest.text!.trimmingCharacters(in: CharacterSet.whitespaces),
+                    appDelegate.PASSWORD: sender.text!.trimmingCharacters(in: CharacterSet.whitespaces)
+                    ]
+        saveSettings(settings)
     }
     
     
-    func saveSettings(settings: Dictionary<String, String>) {
+    func saveSettings(_ settings: Dictionary<String, String>) {
+        print("save settings")
+        print(settings)
+        print(appDelegate.USERACCOUNT)
         do {
-            try Locksmith.updateData(settings, forUserAccount: appDelegate.USERACCOUNT)
-        } catch let error as NSError {
-            print(error.description)
+            try Locksmith.saveData(data: settings, forUserAccount: appDelegate.USERACCOUNT)
+        } catch let error as Error {
+            try! Locksmith.updateData(data: settings, forUserAccount: appDelegate.USERACCOUNT)
         }
     }
     
     func loadSettings() -> Dictionary<String, String> {
+        print("------------- loadSettings() ---------------------")
         var settings: Dictionary<String, String> = Dictionary()
-        let data = Locksmith.loadDataForUserAccount(appDelegate.USERACCOUNT)
+        let data = Locksmith.loadDataForUserAccount(userAccount: appDelegate.USERACCOUNT)
         if data != nil {
             settings = data! as! Dictionary<String, String>
         } else {
             do {
                 settings = [appDelegate.LOCATION: "", appDelegate.ACCOUNT: "", appDelegate.PASSWORD: ""]
-                try Locksmith.saveData(settings, forUserAccount: appDelegate.USERACCOUNT)
+                try Locksmith.saveData(data: settings, forUserAccount: appDelegate.USERACCOUNT)
             } catch let error as NSError {
                 print(error.description)
             }
         }
-
+        print("out of settingsView")
         return settings
+        print("-------------------")
 
     }
     
-    @objc func textFieldShouldReturn(textField: UITextField) -> Bool {
+    @objc func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true);
         return false;
     }
